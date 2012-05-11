@@ -1,0 +1,97 @@
+.v-ellip, v\:ellip {
+            text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;
+            -moz-binding: url( 'bindings.xml#ellipsis' );
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+            max-width: 100%;
+        }
+.dP{
+	width:1000px;
+	/*left:-500px;*/
+}
+#imageAnnotationBox{
+	clear:both;
+}
+#imageAnnotationBox img{
+	padding:5px;
+	float:left;
+}
+#audioAnnotationBox{
+	clear:both;
+}
+#audioAnnotationBox span{
+	padding:5px;
+	float:left;
+}
+#videoAnnotationBox{
+	clear:both;
+}
+#videoAnnotationBox span{
+	padding:5px;
+	float:left;
+}
+.barImg{
+	margin:10px;
+	position:relative;
+	float:left;
+	width:118px; 
+	height:31px;
+	text-align:center;
+	background:url('../images/b1.png');
+	cursor:default;
+	z-index:2;
+}
+#nav div span{
+	position:relative;
+	font-weight:bold;
+	font-size:14px;
+	top:7px;
+	cursor:default;
+	
+}
+body{
+	/*text-align:center;*/
+	margin:0px;
+	min-width:800px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+}
+#center{
+	position:absolute;
+	width:1px;
+	margin:auto;
+	/*text-align:left;*/
+}
+.gloss{
+	color: #00F;
+	cursor:pointer;
+}
+#audioAudio{
+	width:100%;
+	text-align:center;
+}
+#imageImage{
+	width:100%;
+}
+#myList {
+	margin: 1em;
+	float: left;
+	display:none;
+	text-align:left;
+}
+#myList UL {
+	float:left;
+	padding: 0px;
+	margin: 0em 1em;
+}
+#myList LI {
+	float:left;
+	width: 60px;
+	border: solid 1px #2AA7DE;
+	background: #6CC8EF;
+	padding: 5px 5px;
+	margin: 2px 0px;
+	list-style: none;
+}

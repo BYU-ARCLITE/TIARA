@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="icon" href="images/favicon.png"/>
+<title>Annotated Reader Application</title>
+<link href="scripts/readermain.css" rel="stylesheet" type="text/css"/>
+<script src="scripts/jquery.js"></script>
+</head>
+
+<body>
+<div id="center">
+	<div id="splash" class="dP" style="position:absolute; top:10px; height: 61px;"><img style="position:relative; left:-12px;" src="images/splash.png"/></div>
+	<div id="nav" class="dP" style="position:absolute; top:76px;  height: 52px; background:url('images/bar.png'); border-left:solid 1px #666;border-right:solid 1px #666;">
+
+	</div>
+	<div id="app" class="dP" style="position:absolute; top:128px;">
+		<div id="translation" style="position:absolute; cursor:move; border:solid 2px #666; z-index:3; top:140px; padding:20px; visibility:hidden; width:400px; background:#eee; left: 91px;">
+		<span onclick="document.getElementById('translation').style.visibility='hidden'" style="cursor:pointer; font-weight:bold; text-align:right; color:#333">close X</span>
+		<br/><br/>
+		<div style="background:#fff; padding:10px;" id="wordsTranslate"></div>
+		</div>
+		<div id="appBorder" style="position:relative; top:0px; left:0px; width:100%; border-top:none; padding:40px;">
+			<div style="width:90%">
+				<h1>Help</h1>
+				<a href="#one">How do I see the annotations?</a><br/>
+				<a href="#two">How do I add/edit annotations?</a><br/>
+				<a href="#three">How do I handle affixes / parts of words?</a><br/>
+				<a href="#four">How do I add/edit pages?</a><br/>
+				<a href="#five">How do I navigate page content?</a><br/>
+				<a href="#six">How do I access the translation box?</a><br/><br/>
+
+				<h3>How do I see the annotations?</h3>
+				<a name="one">Full annotations are not displayed in the editor. To see what annotations have been added to any particular word, click the word in the right-column annotations list or highlighted in the document text to open the gloss editor. Double-click on an entry in the "Annotations" list to see the information in that annotation.</a>
+
+				<h3>How do I add/edit annotations?</h3>
+				<a name="two"> Open the gloss editor by clicking on a highlighted word, one of the words in the right-column gloss list, or the + button in the right-column. To add additional annotations to a previously annotated word, ensure that word is selected in the gloss library, and click one of the "Add _ Annotation" buttons. To begin adding annotations to a non-annotated word, first type the word in the "Glossed Word" box and click "Add to Library", or open the gloss editor by highlighting an unglossed word & selecting "Add Gloss" from the right-click menu. To edit an annotation, double-click on an existing annotation in the list to bring up the "Add" dialog with it's data already filled-in.</a>
+				
+				<h3>How do I handle affixes / parts of words?</h3>
+				<a name="three"> You can use non-display characters to break up words so that only pieces will be highlighted. Typing "\@" in the page editor will add a non-display character to the text. In languages that do not typically mark word boundaries (such as Japanese), all annotations must be suffixed with the "\@" non-display character to separate them from the rest of the text for highlighting. A dialog box will ask for permission to do this marking automatically when you add a new annotation or edit an annotation that is not marked on the current page.</a>
+				
+				<h3>How do I add/edit pages?</h3>
+				<a name="four"> Open the page editor by clicking on the + button in the content area. This allows you to edit the title and text for one page at a time; in a new document, you will start with 1 blank page to edit. To add additional pages, click the "New Page" button. The page currently being edited can be changed by selecting a page in the library list and clicking the "Load Page from Library" button, or by double-clicking on a selection from the page library. Pages can be re-ordered and deleted with the "Move Selection Up", "Move Selection Down", and "Delete from Library" buttons. </a>
+
+				<h3>How do I navigate page content?</h3>
+				<img src="images/help/help4.png"/><br/><br/>
+				<a name="five"> Locate the black arrows shown above and click either the left or the right to navigate forward or back. Alternately, double-clicking on the current page number will open a dialog box to allow you to jump to any page immediately.</a>
+
+				<h3>How do I access the translation box?</h3>
+				<img src="images/help/help6.png"/><br/><br/>
+				<a name="six">Select a word or words that you want to translate. While the selection is still on, right click to bring up the Right Click Menu. Select "Translate". A box containing the translation will appear. To move the box click and drag. To close the box click "close X".</a>
+
+			</div>
+		</div>
+	</div>  
+</div>
+<script>
+function resizeApp(){
+	var viewportheight,viewportwidth;  
+	if(typeof window.innerHeight != 'undefined'){
+		//viewportheight = window.innerHeight;
+		viewportwidth = window.innerWidth;
+	}else if(
+		typeof document.documentElement != 'undefined' &&
+		typeof document.documentElement.clientHeight != 'undefined' &&
+		document.documentElement.clientHeight != 0
+	){ 
+		//viewportheight = document.documentElement.clientHeight;
+		viewportwidth = document.documentElement.clientWidth;
+	}else{
+		//viewportheight = document.getElementsByTagName('body')[0].clientHeight;
+		viewportwidth = document.getElementsByTagName('body')[0].clientWidth;
+	}
+	document.getElementById("center").style.left = Math.max((viewportwidth/2)-505,0) + "px";
+}
+
+//////////
+//		RUNTIME
+//////////
+
+// Jquery function that is the same as body.onload, but with Jquery functionality
+$(document).ready(function(){resizeApp();initReaderApp();});
+$(window).resize(resizeApp);
+</script>
+</body>
+</html>

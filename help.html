@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="icon" href="images/favicon.png"/>
+<title>Annotated Reader Application</title>
+<link href="scripts/readermain.css" rel="stylesheet" type="text/css"/>
+<script src="scripts/jquery.js"></script>
+</head>
+
+<body>
+<div id="center">
+	<div id="splash" class="dP" style="position:absolute; top:10px; height: 61px;"><img style="position:relative; left:-12px;" src="images/splash.png"/></div>
+	<div id="nav" class="dP" style="position:absolute; top:76px;  height: 52px; background:url('images/bar.png'); border-left:solid 1px #666;border-right:solid 1px #666;">
+
+	</div>
+	<div id="app" class="dP" style="position:absolute; top:128px;">
+		<div id="translation" style="position:absolute; cursor:move; border:solid 2px #666; z-index:3; top:140px; padding:20px; visibility:hidden; width:400px; background:#eee; left: 91px;">
+		<span onclick="document.getElementById('translation').style.visibility='hidden'" style="cursor:pointer; font-weight:bold; text-align:right; color:#333">close X</span>
+		<br/><br/>
+		<div style="background:#fff; padding:10px;" id="wordsTranslate"></div>
+		</div>
+		<div id="appBorder" style="position:relative; top:0px; left:0px; width:100%; border-top:none; padding:40px;">
+
+			<div style="width:90%">
+				<h1>Help</h1>
+				<a href="#one">How do I see the annotations?</a><br/>
+				<a href="#three">How do I know what annotations are available for a glossed word?</a><br/>
+				<a href="#four">How do I look at different pages?</a><br/>
+				<a href="#five">What does the right click menu do?</a><br/>
+				<a href="#six">How do I access the translation box?</a><br/><br/>
+
+				<h3>How do I see the annotations?</h3>
+				<img src="images/help/help1.png"/><br/>
+				<img src="images/help/help2.png"/><br/><br/>
+				<a name="one"> The annotations bar shown above contains buttons that activate and deactivate the annotations. Click an annotation button to activate the mode, then click a glossed word to see the annotations for that word appear in the annotations window on the right (or in the annotation dialog in pop-up mode).</a>
+
+				<h3>How do I know what annotations are available for a glossed word?</h3>
+				<img src="images/help/help3.png"/><br/><br/>
+				<a name="three"> The bar above the annotations window shows what glossed word is currently active. This bar also displays text, image, audio, and video icons for each annotation type that the glossed word contains.</a>
+
+				<h3>How do I look at different pages?</h3>
+				<img src="images/help/help4.png"/><br/><br/>
+				<a name="four">Locate the black arrows shown above and click either the left or the right to navigate forward or back. Double-clicking on the page number will bring up a pop-up box that allows to you jump directly to any page number.</a>
+
+				<h3>What does the Right Click Menu do?</h3>
+				<img src="images/help/help5.png"/><br/><br/>
+				<a name="five"> Right clicking activates the Right Click Menu. This menu contains a translate option, as well as a list of the annotation modes that can be used as an alternative to the buttons for activating and deactivating annotation modes.</a>
+
+				<h3>How do I access the translation box?</h3>
+				<img src="images/help/help6.png"/><br/><br/>
+				<a name="six">Select a word or words that you want to translate. While the selection is still on, right click to bring up the Right Click Menu. Select "Translate". A box containing the translation will appear. To move the box click and drag. To close the box click "close X".</a>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+function resizeApp(){
+	var viewportheight,viewportwidth;  
+	if(typeof window.innerHeight != 'undefined'){
+		//viewportheight = window.innerHeight;
+		viewportwidth = window.innerWidth;
+	}else if(
+		typeof document.documentElement != 'undefined' &&
+		typeof document.documentElement.clientHeight != 'undefined' &&
+		document.documentElement.clientHeight != 0
+	){ 
+		//viewportheight = document.documentElement.clientHeight;
+		viewportwidth = document.documentElement.clientWidth;
+	}else{
+		//viewportheight = document.getElementsByTagName('body')[0].clientHeight;
+		viewportwidth = document.getElementsByTagName('body')[0].clientWidth;
+	}
+	document.getElementById("center").style.left = Math.max((viewportwidth/2)-505,0) + "px";
+}
+
+//////////
+//		RUNTIME
+//////////
+
+// Jquery function that is the same as body.onload, but with Jquery functionality
+$(document).ready(function(){resizeApp();initReaderApp();});
+$(window).resize(resizeApp);
+</script>
+</body>
+</html>
