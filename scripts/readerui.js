@@ -351,7 +351,7 @@ function makeAnnotations(parent,param){
 						};
 						(Languages.a_format[TIARA.Content.contentLanguage] || Languages.a_format._default)(obj);
 						newdiv = document.createElement('div');
-						console.log(a.url);
+						if(window.console){console.log(a.url);}
 						newdiv.innerHTML = '<hr/>'+obj.title+br+(
 								(/youtube/i.test(a.url))?'<iframe src="'+a.url.replace("&.*","").replace("watch?v=","v/")+'" frameborder="0" scrolling="no" width="100%"></iframe>':
 								(/youtu\.be/i.test(a.url))?'<iframe src="'+a.url.replace(/.*youtu\.be/i,"http://www.youtube.com/v")+'" frameborder="0" scrolling="no" width="100%"></iframe>':

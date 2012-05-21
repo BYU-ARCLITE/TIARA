@@ -120,11 +120,11 @@ function makeMainWindow(param){
 	
 	function _log(type,data){
 		data+="";
-		if(console){console.log(data.substring(0,100));}
+		if(window.console){console.log(data.substring(0,100));}
 		$.ajax({
 			type: 'POST',
 			url: "TIARAlogger.php",
-			success: function(data){if(console){console.log(data);}},
+			success: function(data){if(window.console){console.log(data);}},
 			error: null,
 			data:{
 				type:type.substring(0,50),
@@ -194,13 +194,13 @@ function makeMainWindow(param){
 					if(index === -1){ break; }
 					while(!!(regResult = regex.exec(workstr)) && (regex.lastIndex<=strlen)){
 							HCrecurse(regResult.index+1,index); //part 1
-							span.appendChild(modnode(filter(regResult.fullmatch),regResult.match)); //part 2
+							span.appendChild(modnode(filter(regResult[0]),regResult[1])); //part 2
 							pos = regex.lastIndex;
 					}
 				}while(true);
 				while(!!(regResult = regex.exec(workstr)) && (regex.lastIndex<=strlen)){
-					span.appendChild(filter(workstr.substring(pos,regResult.index+1)));		//part 1
-					span.appendChild(modnode(filter(regResult.fullmatch),regResult.match));	//part 2
+					span.appendChild(filter(workstr.substring(pos,regResult.index+1)));	//part 1
+					span.appendChild(modnode(filter(regResult[0]),regResult[1]));		//part 2
 					pos = regex.lastIndex;
 				}
 				span.appendChild(filter(workstr.substring(pos,strlen)));
@@ -456,7 +456,7 @@ function makeMainWindow(param){
 			url: local_path+".json?time="+(+new Date),
 			success: setContent,
 			error: function(xmlhttp1,text,err){
-				if(console){console.log(err);}
+				if(window.console){console.log(err);}
 				$.ajax({
 					url: local_path+".xml?time="+(+new Date),
 					success: setContent,
