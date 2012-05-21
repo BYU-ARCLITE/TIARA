@@ -16,8 +16,7 @@ switch($_POST['mode']){
 			strpos($fname,'\\')===false or //public files
 			strpos($fname,$user)===0 //current user's files
 		){
-			if(file_exists($path.'.xml')){echo unlink($path.'.xml');}
-			else if(file_exists($path.'.json')){echo unlink($path.'.json');}
+			if(file_exists($path.'.json')){echo unlink($path.'.json');}
 			else{echo 1;}
 		}else{echo 0;} //not allowed
 		break;
@@ -32,10 +31,9 @@ switch($_POST['mode']){
 		fwrite($fh,$doc);
 		fclose($fh);
 		echo 1;
-		if(file_exists($path.'.xml')){unlink($path.'.xml');}
 		break;
 	case 'check':
 		$path = 'docs'.$link.$fname;
-		echo (file_exists($path.'.json') or file_exists($path.'.xml'))?1:0;
+		echo (file_exists($path.'.json')?1:0;
 }
 ?>

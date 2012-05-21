@@ -125,15 +125,14 @@ function saveDocument(main_win,doc){
 		type: 'POST',
 		url: 'saveJSON.php', //php script to save the data
 		data: {mode:'check',fname:fname}, //filename
-		success: function(data, textStatus, XMLHttpRequest){
+		success: function(data, textStatus){
 			if(data!=='1' || confirm("Replace existing document?")){$.ajax({
 				type: 'POST',
 				url: 'saveJSON.php', //php script to save the data
 				data: {mode:'save',fname:main_win.saveAs.value,content:datastr}, //filename and stringified Content
-				success: function(data, textStatus, XMLHttpRequest){
-					//alert(data);
+				success: function(data, textStatus){ //redirect to authorhome
 					window.location.assign('./authorhome.php');
-				} //redirect to authorhome
+				}
 			});}
 		}
 	});

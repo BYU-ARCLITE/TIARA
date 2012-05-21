@@ -385,36 +385,6 @@ function makeMainWindow(param){
 		}
 	}
 	
-	// uses xml2json to parse the Annotated Reader's content file into a json object
-	function parseXMLContent(xml){//------------------------------------------------------ setContent() ----------------->>>>>
-		var x,xmlContent = $.xml2json(xml.replace("&","&amp;")),
-			mainContent = xmlContent.mainContent;
-		if(mainContent.page){
-			if(!(mainContent.page instanceof Array)){
-				map(mainContent.page,['title','content'],entityToHTML);//unescape);
-				mainContent.page = [mainContent.page];
-			}else{
-				for(x=mainContent.page.length-1;x>=0;x--){
-					map(mainContent.page[x],['title','content'],entityToHTML);//unescape);
-				}
-			}
-		}else{mainContent.page = [{title:"",content:""}];}
-		if(!mainContent.contentLanguage){mainContent.contentLanguage="es";}
-		if(!mainContent.translationLanguage){mainContent.translationLanguage="en";}
-		if(!xmlContent.glossedWords){xmlContent.glossedWords = [];}
-		else{
-			xmlContent.glossedWords = xmlContent.glossedWords.glossedWord;
-			normalizeGlosses(xmlContent);
-		}
-		
-		xmlContent.pages = mainContent.page;
-		contentLanguage=xmlContent.contentLanguage=mainContent.contentLanguage;
-		translationLanguage=xmlContent.translationLanguage=mainContent.translationLanguage;
-		delete xmlContent.mainContent;
-
-		return xmlContent;
-	}
-
 	function parseJSONContent(jsonContent){//------------------------------------------------------ setContent() ----------------->>>>>
 		var x;
 		if(jsonContent.pages){
@@ -440,7 +410,7 @@ function makeMainWindow(param){
 	
 	// sets Content to the json object, then loads the page
 	function setContent(data){
-		TIARA.Content = (data.pages?parseJSONContent:parseXMLContent)(data);
+		TIARA.Content = parseJSONContent(data);
 		if(param.onContentLoaded){param.onContentLoaded(TIARA.Content);}
 		_loadPage();
 	}
@@ -455,16 +425,9 @@ function makeMainWindow(param){
 		$.ajax({
 			url: local_path+".json?time="+(+new Date),
 			success: setContent,
-			error: function(xmlhttp1,text,err){
+			error: function(http,text,err){
 				if(window.console){console.log(err);}
-				$.ajax({
-					url: local_path+".xml?time="+(+new Date),
-					success: setContent,
-					error: function(xmlhttp2){
-						alert("Error "+xmlhttp1.status+", "+xmlhttp2.status+" loading document.");
-					},
-					dataType: "text"
-				});
+				alert("Error "+http.status+" loading document.");
 			},
 			dataType: "json"
 		});

@@ -94,7 +94,7 @@ function delDoc(){
 												// loop through all of the files
 												while (false !== ($fname = readdir($fhandle))) {
 													// if it's a data file, output it.
-													if (preg_match('/\.(xml|json)$/',$fname)) {
+													if (preg_match('/\.json$/',$fname)) {
 														$basename = implode('.',explode('.',$fname,-1));
 														echo "<option value=\"$dname/$basename\">$dname: $basename</option>\n";
 													}
@@ -103,7 +103,7 @@ function delDoc(){
 												closedir($fhandle);
 											}
 										}else{ // if it's a data file, output it.
-											if (preg_match('/\.(xml|json)$/',$dname)) {
+											if (preg_match('/\.json$/',$dname)) {
 												$basename = implode('.',explode('.',$dname,-1));
 												echo "<option value=\"$basename\">$basename</option>\n";
 											}
