@@ -3,17 +3,17 @@ session_start();
 
 if(isset($_SESSION['user'])){
 	$user = $_SESSION['user'];
-	$link = '\\'.$user.'\\';
+	$link = '/'.$user.'/';
 }else{
-	$link = '\\';
-	$user = '\\';
+	$link = '/';
+	$user = '/';
 }
 $fname = str_replace('\\\\','\\',$_POST['fname']);
 switch($_POST['mode']){
 	case 'delete':
-		$path = 'docs\\'.$fname;
+		$path = 'docs/'.$fname;
 		if(
-			strpos($fname,'\\')===false or //public files
+			strpos($fname,'/')===false or //public files
 			strpos($fname,$user)===0 //current user's files
 		){
 			if(file_exists($path.'.json')){echo unlink($path.'.json');}
@@ -34,6 +34,6 @@ switch($_POST['mode']){
 		break;
 	case 'check':
 		$path = 'docs'.$link.$fname;
-		echo (file_exists($path.'.json')?1:0;
+		echo file_exists($path.'.json')?1:0;
 }
 ?>

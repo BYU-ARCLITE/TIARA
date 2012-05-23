@@ -14,7 +14,6 @@ include 'password_protect_page.php'; //uncomment to turn on password protection
 <title>Annotated Reader Application</title>
 <script src="scripts/jquery.js"></script>
 <script src="scripts/jqueryui.js"></script>
-<script src="scripts/xml2json.js"></script>
 
 <!-- right click menu -->
 <script src="scripts/jquery.contextMenu.js" type="text/javascript"></script>
