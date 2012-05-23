@@ -1,0 +1,14 @@
+﻿# Mac crap
+.DS_Store
+.ds_store
+
+# Windows crap
+Thumbs.db
+thumbs.db
+
+############
+## Local Stuff
+############
+docs/*
+web.config
+*.conf
