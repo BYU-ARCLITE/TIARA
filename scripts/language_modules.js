@@ -87,12 +87,14 @@ var Languages = {
 		//closure scope stuff goes here
 		function overwrite_exec(i,j){
 			return function exec(s){
-				var res = RegExp.prototype.exec.call(this,s);
-				return res && {
-					match: res[i],
-					fullmatch: res[j],
-					index: res.index
-				};
+				var ret,
+					res = RegExp.prototype.exec.call(this,s);
+				if(res){
+					ret = [res[i],res[j]];
+					ret.index = res.index;
+					return ret;
+				}
+				return null;
 			};
 		}
 		
@@ -105,14 +107,12 @@ var Languages = {
 					return s.indexOf(tag_word)>=0;
 				},
 				exec:function(s){
-					var index = s.indexOf(tag_word,lastIndex);
+					var ret, index = s.indexOf(tag_word,lastIndex);
 					if(index>=0){
 						lastIndex = index+wlen;
-						return {
-							match: word,
-							fullmatch: word,
-							index: index-1
-						};
+						ret = [word,word];
+						ret.index = index-1;
+						return ret;
 					}
 					return null;
 				},
