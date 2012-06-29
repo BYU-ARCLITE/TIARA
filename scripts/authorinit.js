@@ -13,6 +13,24 @@
 
 var page_cache = false,gloss_cache = false;
 
+function JSONglosses(){
+	var obj = {word:this.word};
+	//eliminates extraneous bookkeeping properties and filters out zero-length annotation arrays
+	if(this.textAnnotation.length){
+		obj.textAnnotation = this.textAnnotation;
+	}
+	if(this.imageAnnotation.length){
+		obj.imageAnnotation = this.imageAnnotation;
+	}
+	if(this.audioAnnotation.length){
+		obj.audioAnnotation = this.audioAnnotation;
+	}
+	if(this.videoAnnotation.length){
+		obj.videoAnnotation = this.videoAnnotation;
+	}
+	return obj;
+}
+
 function initAuthorApp(){
 	"use strict";
 
@@ -92,9 +110,10 @@ function initAuthorApp(){
 		ann_win: function(){return scAnn;},
 		extension:extendAuthorMainWindow,
 		onContentLoaded:function(content){
-			var i,glosses=content.glossedWords,
-				ann_types={'textAnnotation':true,'imageAnnotation':true,'audioAnnotation':true,'videoAnnotation':true};
+			var i;
 				
+			content.glossedWords.forEach(function(gloss){ gloss.toJSON = JSONglosses; });
+			
 			i=Languages.list.length-1;
 			while(i>-1 && content.contentLanguage !== Languages.list[i][0]){i--;}
 			scMain.cLangBox.selectedIndex = i;
@@ -105,18 +124,6 @@ function initAuthorApp(){
 			
 			scMain.displayGlossList();
 			scAnn.updateGlossLib();
-			
-			function JSONglosses(){
-				var obj = {word:this.word},i;
-				for(i in ann_types){
-					if(this.hasOwnProperty(i) && this[i].length){
-						obj[i]=this[i];
-					}
-				}
-				return obj;
-			}
-			for(i=glosses.length-1;i>=0;i--){glosses[i].toJSON = JSONglosses;}
-			TIARA.JSONglosses = JSONglosses;
 		}
 	});
 

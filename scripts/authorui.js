@@ -98,42 +98,31 @@ function extendAuthorMainWindow(thisObj,param){
 
 function saveDocument(main_win,doc){
 	"use strict";
-	var datastr,x,thisgloss,
-		gwords = doc.glossedWords,
-		fname = main_win.saveAs.value;
+	var fname = $.trim(main_win.saveAs.value);
 	if(!/^[-A-Za-z0-9~ ]+$/.test(fname)){
 		return alert("Invalid Document Name; please use only alphanumeric characters and spaces.");
 	}
-	/*//escape all of the text, just in case
-	map(doc.pages,['title','content'],HTMLToEntity);//escape);
-	for(x=gwords.length-1;x>=0;x--){
-		thisgloss = gwords[x];
-		if(thisgloss.textAnnotation){	map(thisgloss.textAnnotation,['title','content'],HTMLToEntity);}//escape);}
-		if(thisgloss.imageAnnotation){	map(thisgloss.imageAnnotation,['title','url','content'],HTMLToEntity);}//escape);}
-		if(thisgloss.audioAnnotation){	map(thisgloss.audioAnnotation,['title','url','content'],HTMLToEntity);}//escape);}
-		if(thisgloss.videoAnnotation){	map(thisgloss.videoAnnotation,['title','url','content'],HTMLToEntity);}//escape);}
-	}*/
-
-	datastr = JSON.stringify(
-		{
-			contentLanguage:doc.contentLanguage,
-			translationLanguage:doc.translationLanguage,
-			glossedWords:doc.glossedWords,
-			pages:doc.pages
-		},null,'\t');
 	$.ajax({
 		type: 'POST',
-		url: 'saveJSON.php', //php script to save the data
+		url: 'saveJSON.php',
 		data: {mode:'check',fname:fname}, //filename
 		success: function(data, textStatus){
-			if(data!=='1' || confirm("Replace existing document?")){$.ajax({
+			if(data==='1' && !confirm("Replace existing document?")){ return; }
+			var datastr = JSON.stringify({
+				contentLanguage:doc.contentLanguage,
+				translationLanguage:doc.translationLanguage,
+				glossedWords:doc.glossedWords,
+				pages:doc.pages
+			},null,'\t');
+			
+			$.ajax({
 				type: 'POST',
-				url: 'saveJSON.php', //php script to save the data
-				data: {mode:'save',fname:main_win.saveAs.value,content:datastr}, //filename and stringified Content
-				success: function(data, textStatus){ //redirect to authorhome
-					window.location.assign('./authorhome.php');
-				}
-			});}
+				url: 'saveJSON.php',
+				//filename and stringified Content
+				data: {mode:'save',fname:fname,content:datastr},
+				//redirect to authorhome
+				success: function(){ window.location.assign('./authorhome.php'); }
+			});
 		}
 	});
 }
@@ -364,9 +353,6 @@ function makeGlossWindow(param){
 					with({annlatch:thisann}){
 						opt.ondblclick = function(){thisObj.editAnnotation(type,annlatch);};
 					}
-					/*opt.ondblclick = (function(annlatch){
-						return function(){thisObj.editAnnotation(type,annlatch);};
-					}(thisann));*/
 				}
 			}}
 		}
@@ -417,7 +403,7 @@ function makeGlossWindow(param){
 				imageAnnotation:[],
 				audioAnnotation:[],
 				videoAnnotation:[],
-				toJSON: TIARA.JSONglosses
+				toJSON: JSONglosses
 			};
 			i = editGlosses.insertSorted(newgloss,cmpGlosses);
 			glossLib.add(new Option(word),glossLib.options[i] || null);

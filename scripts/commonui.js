@@ -366,15 +366,16 @@ function makeMainWindow(param){
 		while(x<glosses.length){
 			thisgloss = glosses[x];
 			if(thisgloss.word.toLowerCase() === thatgloss.word.toLowerCase()){
+				//collapse glosses with the same word
 				for(i in ann_props){if(thisgloss.hasOwnProperty(i)){
-					map(thisgloss[i],ann_props[i],entityToHTML);//unescape);
+					map(thisgloss[i],ann_props[i],entityToHTML);
 					thatgloss[i][(thisgloss[i] instanceof Array)?'append':'push'](thisgloss[i]);
 				}}
 				glosses.remove(x);
 			}else{
 				for(i in ann_props){
 					if(thisgloss.hasOwnProperty(i)){
-						map(thisgloss[i],ann_props[i],entityToHTML);//unescape);
+						map(thisgloss[i],ann_props[i],entityToHTML);
 						if(!(thisgloss[i] instanceof Array)){thisgloss[i] = [thisgloss[i]];}
 					}else if(ann_props.hasOwnProperty(i)){thisgloss[i] = [];}
 				}

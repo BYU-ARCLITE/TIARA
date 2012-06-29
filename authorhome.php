@@ -25,13 +25,13 @@ header("Pragma: no-cache");
 function newDoc(){window.location.assign('./authordoc.php');}
 function editDoc(){
 	var docsel = document.getElementById('doclist'),
-		docname = docsel.value;
+		docname = docsel.value+"&";
 	if(docsel.selectedIndex<0){alert("Please select a document.");return;}
 	window.location.assign((docname == "New Document")?'./authordoc.php':'./authordoc.php?data='+docname);
 }
 function openDoc(){
 	var docsel = document.getElementById('doclist'),
-		docname = docsel.value,
+		docname = docsel.value+"&",
 		docmode = document.getElementById('docmode').value;
 	if(docsel.selectedIndex<0){alert("Please select a document.");return;}
 	switch(docmode){
@@ -44,17 +44,17 @@ function openDoc(){
 }
 function delDoc(){
 	var docsel = document.getElementById('doclist'),
-		docname = docsel.value.replace("/","\\");
-	if(docsel.selectedIndex<0){alert("Please select a document.");return;}
-	if((docname != "New Document") && confirm("Are you sure you want to delete " + docsel.options[docsel.selectedIndex].text + "?")){
+		docname = docsel.value.replace("/","\\"),
+		index = docsel.selectedIndex;
+	if(index<0){alert("Please select a document.");return;}
+	if((docname != "New Document") && confirm("Are you sure you want to delete " + docsel.options[index].text + "?")){
 		$.ajax({
 			type: 'POST',
 			url: 'saveJSON.php', //php script to save the data
 			data: {mode:'delete',fname:docname}, //filename and JSON stringified Content object
 			success: function(data, textStatus, XMLHttpRequest){
-				alert(data);
 				if(parseInt(data)){
-					docsel.remove(docsel.selectedIndex);
+					docsel.remove(index);
 				}else{
 					alert("Error: file removal failed. You do not have permission to delete this document.");
 				}
