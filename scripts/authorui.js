@@ -278,7 +278,8 @@ function makeGlossWindow(param){
 		saved = false,
 		main_win = param.main_win,
 		ann_latch,type_latch,
-		dg = {text:{
+		dg = {
+			text:{
 				screen:		$("#"+param.textScreen),
 				title:		document.getElementById(param.textTitle),
 				content:	document.getElementById(param.textContent)
@@ -318,14 +319,14 @@ function makeGlossWindow(param){
 	
 	function set_uploader(dialog){
 		"use strict";
-		dialog.file.ajaxForm({
-			success:function (responseData, statusText, xhr, $form){ 
-				var fileObj = responseData[0];
-				if(fileObj.error){alert('Error uploading '+fileObj.file+':\n'+fileObj.error);}
+		dialog.file.fileupload({
+			done:function (e, data){ 
+				var fileObj = data.result;
+				if(fileObj.error){alert('Error uploading '+fileObj.name+':\n'+fileObj.error);}
 				else{dialog.url.value = fileObj.path;}
-			},	// post-submit callback 
-			url:			'uploader.php',	// override for form's 'action' attribute 
-			type:			'POST',			// 'get' or 'post', override for form's 'method' attribute
+			},
+			url:			'uploader.php',
+			type:			'POST',
 			dataType:		'json'
 		});
 	}

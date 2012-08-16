@@ -184,13 +184,9 @@ include 'password_protect_page.php'; //uncomment to turn on password protection
 		<center>
 			Title:<br/>
 			<input id="<?php echo $prefix;?>atitle" type="text" style="width:90%;" /><br/>
+			<input type="file" id="<?php echo $prefix;?>afile" name="file" style="color:white;" /><br/>
 			URL:<br/>
 			<input id="<?php echo $prefix;?>aurl" type="text" /><br/>
-			<form id="<?php echo $prefix;?>afile" enctype="multipart/form-data">
-				<input type="hidden" name="MAX_FILE_SIZE" value="100000" />
-				File: <input type="file" name="file" />
-				<input type="submit" value="Upload" />
-			</form><br/>
 			Caption:<br/>
 			<textarea id="<?php echo $prefix;?>acontent" rows="5" cols="40"></textarea><br/>
 			<button id="<?php echo $prefix;?>aButton">Add</button><br/>
@@ -200,7 +196,7 @@ include 'password_protect_page.php'; //uncomment to turn on password protection
 	<?php } ?>
 		
 	<!-- file uploader -->
-	<script src="scripts/jquery.form.js" type="text/javascript"></script>
+	<script src="scripts/jquery.fileupload.js" type="text/javascript"></script>
 
 	<!-- right click menu -->
 	<script src="scripts/jquery.contextMenu.js" type="text/javascript"></script>
