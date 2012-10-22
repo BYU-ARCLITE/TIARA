@@ -2,8 +2,8 @@
 session_start();
 
 $path = (isset($HTTP_SESSION_VARS['user']))
-	?"xmldocs\\".$HTTP_SESSION_VARS['user']."\\media\\"
-	:"xmldocs\\media\\";
+	?'docs/'.$HTTP_SESSION_VARS['user'].'/media'
+	:'docs/media';
 
 if(!file_exists($path)) mkdir($path,0,true) or	die("[{error:'Could not create directory.'}]");
 $upload = $_FILES['file'];
