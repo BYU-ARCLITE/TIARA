@@ -1,7 +1,12 @@
 <?php
+if(!isset($_GET['data'])){
+	$host  = $_SERVER['HTTP_HOST'];
+	$uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+	header("Location: http://$host$uri/readerhome.php");
+	die;
+}
 $conf_files = array("user_passwords.conf","reader_passwords.conf");
-include 'password_protect_page.php'; //uncomment to turn on password protection
-//var_dump($users);
+include 'password_protect_page.php';
 ?>
 <!DOCTYPE html>
 <html>
