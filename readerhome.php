@@ -33,19 +33,13 @@ foreach($doc_array as $author => $doclist){
 			<center>
 				<table id="theTable" style="position:relative;overflow:hidden;text-align:center;">
 					<tr>
-						<td id="myDiv" style="height:520px;padding:20px; text-align:center;" valign="top">
-							<button onclick="openDoc();">OPEN IN READER</button><br/>
+						<td id="myDiv" valign="top" colspan="6">
+							<button id="openbutton">OPEN IN READER</button><br/>
 							<select id="docmode">
 								<option value="0">Normal Mode</option>
 								<option value="1">Thumbnail Mode</option>
 								<option value="2">Popup Mode</option>
 								<option value="3">Popup with Thumbnails</option>
-							</select><br/>
-							<button id="sortbutton" style="font-size:8pt;">Sort by Document</button><br/>
-							<select id="authlist" style="width:200px;" size=20>
-							<?php foreach(array_keys($doc_array) as $author){
-								echo "<option value=\"$author\">$author</option>\n";
-							}?>
 							</select>
 						</td>
 					</tr>

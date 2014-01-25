@@ -166,11 +166,6 @@ var Languages = {
 			}())
 		};
 	}()),
-	alignment:{
-		ar:'right',
-		iw:'right',
-		fa:'right'
-	},
 	gloss_markers:(function(){
 		function basic_marker(text,word){
 			var regex = RegExp(

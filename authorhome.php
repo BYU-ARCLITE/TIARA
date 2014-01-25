@@ -30,11 +30,12 @@ function editDoc(){
 }
 function delDoc(){
 	var docpath,
+		index = doclist.selectedIndex !== -1 ? doclist.selectedIndex : 0,
 		author = getVal(authlist),
 		docname = getVal(doclist);
 	if(!(author && docname)){alert("Please select a document.");return;}
 	docpath = author+"\\"+docname;
-	if(confirm("Are you sure you want to delete " + doclist.options[doclist.selectedIndex].text + "?")){
+	if(confirm("Are you sure you want to delete " + doclist.options[index].text + "?")){
 		$.ajax({
 			type: 'POST',
 			url: 'saveJSON.php', //php script to save the data
@@ -63,9 +64,8 @@ function delDoc(){
 			<center>
 				<table id="theTable" style="position:relative;overflow:hidden;text-align:center;">
 					<tr>
-						<td id="myDiv" style="height:520px;padding:20px; text-align:center;" valign="top">
-							<button onclick="openDoc();">OPEN IN READER</button><br/>		
-							<button onclick="sortDocs();" id="sortbutton" style="font-size:8pt;">Sort by Author</button><br/>
+						<td id="myDiv" valign="top" colspan="6">
+							<button id="openbutton">OPEN IN READER</button><br/>
 							<select id="docmode">
 								<option value="0">Normal Mode</option>
 								<option value="1">Thumbnail Mode</option>
@@ -81,15 +81,20 @@ function delDoc(){
 					<tr>
 						<td colspan="3">
 							<select id="authlist" style="width:200px;" size=20>
-							<?php
-								foreach(array_keys($doc_array) as $author){
-									echo "<option value=\"$author\">$author</option>\n";
-								}
-							?>
+							<?php foreach(array_keys($doc_array) as $author){
+								echo "<option value=\"$author\">$author</option>\n";
+							}?>
 							</select>
-							<select id="doclist" style="width:200px;" size=20></select><br/>
-							<button onclick="newDoc();">NEW DOCUMENT</button><br/><br/>
-							<button onclick="editDoc();">EDIT DOCUMENT</button><br/>
+						</td><td colspan="3">
+							<select id="doclist" style="width:200px;" size=20></select>
+						</td>
+					</tr><tr>
+						<td colspan="6">
+							<button onclick="newDoc();">NEW DOCUMENT</button>
+							<button onclick="editDoc();">EDIT DOCUMENT</button>
+						</td>
+					</tr><tr>
+						<td colspan="6">
 							<button onclick="delDoc();">DELETE DOCUMENT</button>
 						</td>
 					</tr>
