@@ -7,8 +7,8 @@ include 'password_protect_page.php'; //uncomment to turn on password protection
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="icon" href="images/favicon.png"/>
-<link href="scripts/jquery-ui.css" rel="stylesheet" type="text/css"/>
-<link href="scripts/readermain.css" rel="stylesheet" type="text/css"/>
+<link href="css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<link href="css/readermain.css" rel="stylesheet" type="text/css"/>
 <title>Annotated Reader Application</title>
 <script src="scripts/jquery.js"></script>
 <script src="scripts/jqueryui.js"></script>
@@ -21,6 +21,11 @@ include 'password_protect_page.php'; //uncomment to turn on password protection
 <script src="scripts/authorui.js"></script>
 <script src="scripts/authorinit.js"></script>
 
+<!-- right click menu -->
+<script src="scripts/jquery.contextMenu.js" type="text/javascript"></script>
+<link href="css/jquery.contextMenu.css" rel="stylesheet" type="text/css"/>
+
+<script src="scripts/noselect.js"></script>
 </head>
 <body>
 	<div id="center">
@@ -194,21 +199,6 @@ include 'password_protect_page.php'; //uncomment to turn on password protection
 		</center>
 	</div>
 	<?php } ?>
-		
-	<!-- file uploader -->
-	<script src="scripts/jquery.fileupload.js" type="text/javascript"></script>
-
-	<!-- right click menu -->
-	<script src="scripts/jquery.contextMenu.js" type="text/javascript"></script>
-	<link href="scripts/jquery.contextMenu.css" rel="stylesheet" type="text/css"/>
-	
-	<!-- google translate script -->
-	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-	<script type="text/javascript">
-		google.load("language", "1");
-	</script>
-
-	<script src="scripts/noselect.js"></script>
 	<script language="JavaScript" type="text/javascript">
 	var width_toggle=false;
 	var max_width=1100;

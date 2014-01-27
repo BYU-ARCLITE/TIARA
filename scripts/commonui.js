@@ -140,12 +140,21 @@ function makeMainWindow(param){
 		var tboxstyle = document.getElementById('translation').style,
 			ttext = document.getElementById('wordsTranslate');
 		return function(str,from,to){
-			google.language.translate(str, from, to, function(result) {
-				_log("Translation",str+" -> "+(result.translation || "Error"));
-				if (!result.error){
-					ttext.innerHTML = result.translation;
+			$.ajax({
+				type: 'POST',
+				url: 'translate.php',
+				dataType: 'json',
+				data: {source:from, target:to, text:str},
+				success: function(data, textStatus){
+					var translation = data.data.translations[0].translatedText;
+					_log("Translation",str+" -> "+translation);
+					ttext.innerHTML = translation;
 					tboxstyle.visibility='visible';
-				}else{alert("Translation Error.");}
+				},
+				error: function(jqXHR, textStatus, errStr){
+					_log("Translation",str+" -> ERROR: "+errStr);
+					alert("Translation Error");
+				}
 			});
 		};
 	}());

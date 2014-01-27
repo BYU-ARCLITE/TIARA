@@ -13,8 +13,8 @@ include 'password_protect_page.php';
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="icon" href="images/favicon.png"/>
-<link href="scripts/readermain.css" rel="stylesheet" type="text/css"/>
-<link href="scripts/jquery.contextMenu.css" rel="stylesheet" type="text/css"/>
+<link href="css/readermain.css" rel="stylesheet" type="text/css"/>
+<link href="css/jquery.contextMenu.css" rel="stylesheet" type="text/css"/>
 
 <title>Annotated Reader Application</title>
 <script src="scripts/jquery.js"></script>
@@ -25,12 +25,6 @@ include 'password_protect_page.php';
 
 <!-- get URL paramaters script -->
 <script src="scripts/getURL.js"></script>
-
-<!-- google translate script -->
-<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-<script type="text/javascript">
-	google.load("language", "1");
-</script>
 
 <script src="scripts/noselect.js"></script>
 <script src="scripts/commonui.js"></script>
@@ -191,15 +185,5 @@ function resizeApp(){
 $(document).ready(function(){$(".dP").css({width:max_width});resizeApp();initReaderApp();});
 $(window).resize(resizeApp);
 </script>
-<!--
-Nothing works without JS anyway, so this is kind of pointless.
-<noscript>
-	<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0" width="1" height="1" id="soundMachine" align="middle">
-	<param name="allowScriptAccess" value="sameDomain" />
-	<param name="allowFullScreen" value="false" />
-	<param name="movie" value="soundMachine.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" />	<embed src="soundMachine.swf" quality="high" bgcolor="#ffffff" width="1" height="1" name="soundMachine" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer" />
-	</object>
-</noscript>-->
-
 </body>
 </html>

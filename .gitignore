@@ -1,4 +1,4 @@
-﻿# Mac crap
+# Mac crap
 .DS_Store
 .ds_store
 
@@ -10,5 +10,8 @@ thumbs.db
 ## Local Stuff
 ############
 docs/*
+xmldocs/*
 web.config
 *.conf
+
+apikeys.php

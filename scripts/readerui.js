@@ -304,7 +304,7 @@ function makeAnnotations(parent,param){
 							title: a.title || "",
 							content: a.content || ""
 						};
-						(Languages.a_format[TIARA.Content.contentLanguage] || Languages.a_format._default)(obj);
+						(Languages.a_format[TIARA.Content.translationLanguage] || Languages.a_format._default)(obj);
 						newdiv = document.createElement('div');
 						newdiv.innerHTML = br+obj.title+br+obj.content;
 						return newdiv;
@@ -317,7 +317,7 @@ function makeAnnotations(parent,param){
 							title: a.title || "",
 							content: a.content || ""
 						};
-						(Languages.a_format[TIARA.Content.contentLanguage] || Languages.a_format._default)(obj);
+						(Languages.a_format[TIARA.Content.translationLanguage] || Languages.a_format._default)(obj);
 						newdiv = document.createElement('div');
 						newdiv.innerHTML = '<hr/>'+obj.title+br+'<img src="'+a.url+'" width="250px"/>'+br+br+obj.content;
 						return newdiv;
@@ -330,7 +330,7 @@ function makeAnnotations(parent,param){
 							title: a.title || "",
 							content: a.content || ""
 						};
-						(Languages.a_format[TIARA.Content.contentLanguage] || Languages.a_format._default)(obj);
+						(Languages.a_format[TIARA.Content.translationLanguage] || Languages.a_format._default)(obj);
 						newdiv = document.createElement('div');
 						newdiv.innerHTML = "<hr/>"+obj.title+br+"<img src='images/play.png' class='audioplay' width='160px' "+
 							"onmouseover='this.src=\"images/playover.png\";' "+
@@ -349,7 +349,7 @@ function makeAnnotations(parent,param){
 							title: a.title || "",
 							content: a.content || ""
 						};
-						(Languages.a_format[TIARA.Content.contentLanguage] || Languages.a_format._default)(obj);
+						(Languages.a_format[TIARA.Content.translationLanguage] || Languages.a_format._default)(obj);
 						newdiv = document.createElement('div');
 						if(window.console){console.log(a.url);}
 						newdiv.innerHTML = '<hr/>'+obj.title+br+(

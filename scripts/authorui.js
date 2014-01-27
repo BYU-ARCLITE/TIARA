@@ -74,10 +74,11 @@ function extendAuthorMainWindow(thisObj,param){
 	thisObj.displayGlossList = function(){
 		var thisword, newdiv, gwords = TIARA.Content.glossedWords; //maybe here define a new i?
 		thisObj.annBox.innerHTML = "";
+		thisObj.annBox.lang = TIARA.Content.contentLanguage;
 		for (i=gwords.length-1;i>=0;i--){
 			thisword = gwords[i].word;
 			newdiv = document.createElement('div');
-			newdiv.innerHTML = newdiv.title = newdiv.lang = thisword;
+			newdiv.innerHTML = newdiv.title = thisword;
 			newdiv.style.display="inline";
 			newdiv.onclick = param.glossClick;
 			thisObj.annBox.appendChild(newdiv);
@@ -287,19 +288,19 @@ function makeGlossWindow(param){
 				screen:		$("#"+param.imageScreen),
 				title:		document.getElementById(param.imageTitle),
 				url:		document.getElementById(param.imageURL),
-				file:		$("#"+param.imageFile),
+				file:		document.getElementById(param.imageFile),
 				content:	document.getElementById(param.imageContent)
 			},audio:{
 				screen:		$("#"+param.audioScreen),
 				title:		document.getElementById(param.audioTitle),
 				url:		document.getElementById(param.audioURL),
-				file:		$("#"+param.audioFile),
+				file:		document.getElementById(param.audioFile),
 				content:	document.getElementById(param.audioContent)
 			},video:{
 				screen:		$("#"+param.videoScreen),
 				title:		document.getElementById(param.videoTitle),
 				url:		document.getElementById(param.videoURL),
-				file:		$("#"+param.videoFile),
+				file:		document.getElementById(param.videoFile),
 				content:	document.getElementById(param.videoContent)
 			}
 		},
@@ -319,15 +320,19 @@ function makeGlossWindow(param){
 	
 	function set_uploader(dialog){
 		"use strict";
-		dialog.file.fileupload({
-			done:function (e, data){ 
-				var fileObj = data.result;
-				if(fileObj.error){alert('Error uploading '+fileObj.name+':\n'+fileObj.error);}
-				else{dialog.url.value = fileObj.path;}
-			},
-			url:			'uploader.php',
-			type:			'POST',
-			dataType:		'json'
+		dialog.file.addEventListener('change',function(e){
+			var	formData = new FormData(),
+				xhr = new XMLHttpRequest();
+			formData.append('file', this.files[0]);
+			xhr.onreadystatechange = function(){
+				var data;
+				if(this.readyState !== 4){ return; }
+				data = JSON.parse(this.responseText);
+				if(data.error){alert('Error uploading '+data.name+':\n'+data.error);}
+				else{dialog.url.value = data.path;}
+			};
+			xhr.open('POST', 'uploader.php', true);
+			xhr.send(formData);
 		});
 	}
 	

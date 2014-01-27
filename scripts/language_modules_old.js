@@ -9,7 +9,7 @@ var Languages = {
 		["be","Belarusian"],
 		["bg","Bulgarian"],
 		["ca","Catalan"],
-		["zh","Chinese"],
+		["zh-CN","Chinese"],
 		["hr","Croatian"],
 		["cs","Czech"],
 		["da","Danish"],
@@ -58,18 +58,10 @@ var Languages = {
 		["cy","Welsh"],
 		["yi","Yiddish"]
 	],
-	c_format:{
-		ar: function(page){
+	formatters:{
+		ar:function(page){
 			page.title="<div style='text-align:right;' dir='rtl'>"+page.title+"</div>";
-			page.content="<div style='position:relative;width:100%;font-size:20px;text-align:right;' dir='rtl'>"+page.content+"</div>";
-		},
-		iw: function(page){
-			page.title="<div style='text-align:right;' dir='rtl'>"+page.title+"</div>";
-			page.content="<div style='position:relative;width:100%;text-align:right;' dir='rtl'>"+page.content+"</div>";
-		},
-		fa: function(page){
-			page.title="<div style='text-align:right;' dir='rtl'>"+page.title+"</div>";
-			page.content="<div style='position:relative;width:100%;text-align:right;' dir='rtl'>"+page.content+"</div>";
+			page.content="<div style='position:relative; width:100%;font-size:20px; text-align:right;' dir='rtl'>"+page.content+"</div>";
 		}/*,
 		ja:function(page){
 			page.title="<div>"+page.title+"</div>";
@@ -81,60 +73,28 @@ var Languages = {
 			});				
 		}*/
 	},
-	a_format:{
+	ann_formatters:{
 		ar:function(ann){
-			ann.title = "<div style='font-size:20px;' dir='rtl'>"+ann.title+"</div>";
-			ann.content = "<div style='font-size:16px;display:block;' dir='rtl'>"+ann.content+"</div>";
+			ann.title = "<div style='font-size:20px;'>"+ann.title+"</div>";
+			ann.content = "<div style='font-size:16px; display:block;'>"+ann.content+"</div>";
 		},
-		_default:function(ann){
+		default:function(ann){
 			ann.title = "<div style='font-weight:bold;font-size:12px;'>"+ann.title+"</div>";
-			ann.content = "<div style='display:block;'>"+ann.content+"</div>";
+			ann.content = "<div class='v-ellip' style='display:block;'>"+ann.content+"</div>";
 		}
-	},
-	alignment:{
-		ar:'right',
-		iw:'right',
-		fa:'right'
 	},
 	parsers:(function(){
 		//closure scope stuff goes here
 		function overwrite_exec(i,j){
 			return function exec(s){
-				var ret,
-					res = RegExp.prototype.exec.call(this,s);
-				if(res){
-					ret = [res[i],res[j]];
-					ret.index = res.index;
-					return ret;
-				}
-				return null;
+				var res = RegExp.prototype.exec.call(this,s);
+				return res && {
+					match: res[i],
+					fullmatch: res[j],
+					index: res.index
+				};
 			};
-		}
-		
-		function parse_no_spaces(word){
-			var lastIndex=0,
-				tag_word=word+'\\@',
-				wlen=tag_word.length;
-			return {
-				test:function(s){
-					return s.indexOf(tag_word)>=0;
-				},
-				exec:function(s){
-					var ret, index = s.indexOf(tag_word,lastIndex);
-					if(index>=0){
-						lastIndex = index+wlen;
-						ret = [word,word];
-						ret.index = index-1;
-						return ret;
-					}
-					return null;
-				},
-				deepCopy:function(){return this;},
-				get lastIndex(){return lastIndex;},
-				set lastIndex(i){lastIndex=i;}
-			};
-		}
-	
+		};
 		return {
 			ar:(function(){
 				//ARABIC FULL STOP - U+06D4 ARABIC QUESTION MARK - U+061F ARABIC COMMA - U+060C ARABIC SEMICOLON - U+061B ARABIC DECIMAL SEPARATOR - U+066B
@@ -151,9 +111,35 @@ var Languages = {
 					return regex;
 				};
 			}()),
-			ja:parse_no_spaces,
-			zh:parse_no_spaces,
-			_default:(function(){
+			ja:(function(){
+				/*var jaletters = "\\u4E00-\\u9FBF\\u3040-\\u309F\\u30A0-\\u30FF",
+					rf = "(?:^|.)(", //TODO: treat katakana-kanji and punctuation as word boundaries
+					rl = ")(?=$|.)";
+				*/
+				return function(word){
+					var lastIndex=0,
+						tag_word=word+'\\@',
+						wlen=tag_word.length;
+					return {
+						test:function(s){return s.indexOf(tag_word)>=0;},
+						exec:function(s){
+							var index = s.indexOf(tag_word,lastIndex);
+							if(index>=0){
+								lastIndex = index+wlen;
+								return {
+									match: word,
+									fullmatch: word,
+									index: index-1
+								};
+							}
+							return null;
+						},
+						get lastIndex(){return lastIndex;},
+						set lastIndex(i){lastIndex=i;}
+					};
+				};
+			}()),
+			default:(function(){
 				var latin_non_word = "\\s~`'\";:.,/?><[\\]{}\\\\|)(*&^%$#@!=\\-—",
 					rf = "(?:^|["+latin_non_word+"])(",
 					rl = ")(?=$|["+latin_non_word+"])",
@@ -166,17 +152,12 @@ var Languages = {
 			}())
 		};
 	}()),
-	gloss_markers:(function(){
-		function basic_marker(text,word){
-			var regex = RegExp(
-				word.replace(/[\-\/\\?.*\^$\[{()|+]/g,"\\$&") // escape those characters before forming the regex
-				+'(?!\\\\@)', // replace if it doesn't have a \@ after it
-			'gi');
-			return regex.test(text) && text.replace(regex,"$&\\@"); //add a \@ after matching words
+	alignments:{
+		ar:'right'
+	},
+	gloss_markers:{
+		ja:function(text,word){
+			return text.replace(RegExp(word.replace(/[\-\/\\?.*\^$\[{()|+]/g,"\\$&"),'gi'),"$&\\@");
 		}
-		return {
-			ja:basic_marker,
-			zh:basic_marker
-		};
-	}())
+	}
 };
