@@ -8,7 +8,9 @@ include 'password_protect_page.php'; //uncomment to turn on password protection
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="icon" href="images/favicon.png"/>
 <link href="css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<link href="css/jquery.contextMenu.css" rel="stylesheet" type="text/css"/>
 <link href="css/readermain.css" rel="stylesheet" type="text/css"/>
+
 <title>Annotated Reader Application</title>
 <script src="scripts/jquery.js"></script>
 <script src="scripts/jqueryui.js"></script>
@@ -16,16 +18,15 @@ include 'password_protect_page.php'; //uncomment to turn on password protection
 <!-- get URL paramaters script -->
 <script src="scripts/getURL.js"></script>
 
+<!-- right click menu -->
+<script src="scripts/jquery.contextMenu.js"></script>
+
+<script src="scripts/noselect.js"></script>
 <script src="scripts/commonui.js"></script>
 <script src="scripts/language_modules.js"></script>
 <script src="scripts/authorui.js"></script>
 <script src="scripts/authorinit.js"></script>
 
-<!-- right click menu -->
-<script src="scripts/jquery.contextMenu.js" type="text/javascript"></script>
-<link href="css/jquery.contextMenu.css" rel="stylesheet" type="text/css"/>
-
-<script src="scripts/noselect.js"></script>
 </head>
 <body>
 	<div id="center">
