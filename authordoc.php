@@ -84,7 +84,7 @@ include 'password_protect_page.php'; //uncomment to turn on password protection
 			</div>
 			<table id="theTable" style="position:relative; overflow:auto; top:0px; left:0px; width:100%; border-top:none; border-right:solid 1px #000; border-left:solid 1px #000; border-bottom:solid 1px #000;" >
 				<tr>
-					<td id="myDiv" style="border-right:solid 1px #000; width:70%;" valign="top">
+					<td id="mainContent" style="border-right:solid 1px #000; width:70%;" valign="top">
 						<div style="float:right"><img id="addpg" width="23" /></div>
 						<h1 id="theTitle" style="padding-left:20px;padding-right:20px;"></h1>
 						<div id="mainContent" style="position:relative; overflow-y:auto; padding:20px;" ></div>

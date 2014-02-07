@@ -36,16 +36,6 @@ function initAuthorApp(){
 
 	// sets the translation window to be draggable
 	$('#translation').draggable();
-	
-	// Disable menus
-	//	$('#myDiv, #myList UL LI').disableContextMenu();
-	// Enable menus
-	$('#myDiv, #myList UL LI').enableContextMenu();
-
-	// Disable cut/copy
-	//	$('#myMenu').disableContextMenuItems('#cut,#copy');
-	// Enable cut/copy
-	$('#myMenu').enableContextMenuItems('#cut,#copy');
 
 	//Disable Selections
 	disableSelection(document.getElementById("next"));
