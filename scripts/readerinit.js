@@ -18,12 +18,21 @@ var page_cache = [],gloss_cache = [];
 
 function initReaderApp(){
 	"use strict";
-
-	// sets the translation window to be draggable
-	$('#translation').draggable();
 	
 	//sets the annotation pop-up to be draggable
 	$('#annpop').draggable();
+	
+	// sets the translation window to be draggable
+	$('#translation').draggable();
+
+	//Disable Selections
+	disableSelection(document.getElementById("next"));
+	disableSelection(document.getElementById("prev"));
+	disableSelection(document.getElementById("textbutton"));
+	disableSelection(document.getElementById("imagebutton"));
+	disableSelection(document.getElementById("audiobutton"));
+	disableSelection(document.getElementById("videobutton"));
+	disableSelection(document.getElementById("allbutton"));
 	
 	//grab a reference to the sound player
 	soundPlay = (function(){
@@ -105,24 +114,4 @@ function initReaderApp(){
 			}
 		}
 	});
-
-	// Disable menus
-	//	$('#myDiv, #myList UL LI').disableContextMenu();
-
-	// Enable menus
-	$('#myDiv, #myList UL LI').enableContextMenu();
-
-	// Disable cut/copy
-	//	$('#myMenu').disableContextMenuItems('#cut,#copy');
-	// Enable cut/copy
-	$('#myMenu').enableContextMenuItems('#cut,#copy');
-
-	//Disable Selections
-	disableSelection(document.getElementById("next"));
-	disableSelection(document.getElementById("prev"));
-	disableSelection(document.getElementById("textbutton"));
-	disableSelection(document.getElementById("imagebutton"));
-	disableSelection(document.getElementById("audiobutton"));
-	disableSelection(document.getElementById("videobutton"));
-	disableSelection(document.getElementById("allbutton"));	
 }

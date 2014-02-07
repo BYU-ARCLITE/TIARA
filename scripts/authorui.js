@@ -23,7 +23,7 @@ function makeAnnotations(parent,param){
 	"use strict";
 	var aSel;
 	// Code for right click menu translation option
-	$("#myDiv").contextMenu({menu: 'myMenu'},
+	$("#mainContent").contextMenu({menu: 'myMenu'},
 		function(action, el, pos) {
 			switch(action){
 				case "translate": parent.displayTranslation();

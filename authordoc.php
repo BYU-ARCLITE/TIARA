@@ -8,7 +8,9 @@ include 'password_protect_page.php'; //uncomment to turn on password protection
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="icon" href="images/favicon.png"/>
 <link href="css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<link href="css/jquery.contextMenu.css" rel="stylesheet" type="text/css"/>
 <link href="css/readermain.css" rel="stylesheet" type="text/css"/>
+
 <title>Annotated Reader Application</title>
 <script src="scripts/jquery.js"></script>
 <script src="scripts/jqueryui.js"></script>
@@ -16,16 +18,15 @@ include 'password_protect_page.php'; //uncomment to turn on password protection
 <!-- get URL paramaters script -->
 <script src="scripts/getURL.js"></script>
 
+<!-- right click menu -->
+<script src="scripts/jquery.contextMenu.js"></script>
+
+<script src="scripts/noselect.js"></script>
 <script src="scripts/commonui.js"></script>
 <script src="scripts/language_modules.js"></script>
 <script src="scripts/authorui.js"></script>
 <script src="scripts/authorinit.js"></script>
 
-<!-- right click menu -->
-<script src="scripts/jquery.contextMenu.js" type="text/javascript"></script>
-<link href="css/jquery.contextMenu.css" rel="stylesheet" type="text/css"/>
-
-<script src="scripts/noselect.js"></script>
 </head>
 <body>
 	<div id="center">
@@ -83,7 +84,7 @@ include 'password_protect_page.php'; //uncomment to turn on password protection
 			</div>
 			<table id="theTable" style="position:relative; overflow:auto; top:0px; left:0px; width:100%; border-top:none; border-right:solid 1px #000; border-left:solid 1px #000; border-bottom:solid 1px #000;" >
 				<tr>
-					<td id="myDiv" style="border-right:solid 1px #000; width:70%;" valign="top">
+					<td id="mainContent" style="border-right:solid 1px #000; width:70%;" valign="top">
 						<div style="float:right"><img id="addpg" width="23" /></div>
 						<h1 id="theTitle" style="padding-left:20px;padding-right:20px;"></h1>
 						<div id="mainContent" style="position:relative; overflow-y:auto; padding:20px;" ></div>

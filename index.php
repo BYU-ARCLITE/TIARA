@@ -13,18 +13,19 @@ include 'password_protect_page.php';
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="icon" href="images/favicon.png"/>
-<link href="css/readermain.css" rel="stylesheet" type="text/css"/>
+<link href="css/jquery-ui.css" rel="stylesheet" type="text/css"/>
 <link href="css/jquery.contextMenu.css" rel="stylesheet" type="text/css"/>
+<link href="css/readermain.css" rel="stylesheet" type="text/css"/>
 
 <title>Annotated Reader Application</title>
 <script src="scripts/jquery.js"></script>
 <script src="scripts/jqueryui.js"></script>
 
-<!-- right click menu -->
-<script src="scripts/jquery.contextMenu.js" type="text/javascript"></script>
-
 <!-- get URL paramaters script -->
 <script src="scripts/getURL.js"></script>
+
+<!-- right click menu -->
+<script src="scripts/jquery.contextMenu.js"></script>
 
 <script src="scripts/noselect.js"></script>
 <script src="scripts/commonui.js"></script>
@@ -125,7 +126,7 @@ include 'password_protect_page.php';
 	<li><a href="#allbutton">All</a></li>
 </ul>
 
-<script language="JavaScript" type="text/javascript">
+<script>
 AC_FL_RunContent({ //Flash SoundMachine fallback
 	width: 1, height: 1,
 	src:'soundMachine',

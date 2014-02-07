@@ -146,7 +146,8 @@ function makeMainWindow(param){
 				dataType: 'json',
 				data: {source:from, target:to, text:str},
 				success: function(data, textStatus){
-					var translation = data.data.translations[0].translatedText;
+					//engine: data.source,
+					var translation = data.entries.join('<br/>');
 					_log("Translation",str+" -> "+translation);
 					ttext.innerHTML = translation;
 					tboxstyle.visibility='visible';
