@@ -146,10 +146,15 @@ function makeMainWindow(param){
 				dataType: 'json',
 				data: {source:from, target:to, text:str},
 				success: function(data, textStatus){
-					//engine: data.source,
-					var translation = data.entries.join('<br/>');
+					var translation = "No Available Translations", engine = "";
+					if (data instanceof Object){
+						if (data.success === true){
+							translation = data.entries.join('<br/>');
+							engine = "<br/><br/><i>Source: " + data.source + "</i>";
+						}
+					}
 					_log("Translation",str+" -> "+translation);
-					ttext.innerHTML = translation;
+					ttext.innerHTML = translation + engine;
 					tboxstyle.visibility='visible';
 				},
 				error: function(jqXHR, textStatus, errStr){
